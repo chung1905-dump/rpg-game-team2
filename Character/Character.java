@@ -1,5 +1,5 @@
-package Team2.Rpg.Character;
-class Character{
+package team2.rpg.Character;
+abstract class Character{
   int hp;
   int mp;
   // int dmg;

@@ -1,29 +1,17 @@
-# README #
+# RPG #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Bai tap lon nhom 2.
 
-### What is this repository for? ###
-bai tap nhom 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### De bai ###
+* [Link google drive](https://drive.google.com/file/d/0B6HCn9f_dk0VdzVYWm5vakVabHM/view)
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Thanh vien ###
+4 thanh vien
+* Hoang Hong Ha <- team leader
+* Nguyen Duc Chung
+* Nguyen Duc Anh
+* Nguyen Nam Khanh
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* @package team2.rpg

@@ -1,3 +1,5 @@
+package team2.rpg.Item;
+
 class Item{
   String img_path;
   int id;

@@ -1,4 +1,4 @@
-package Team2.Rpg.Character;
+package team2.rpg.Character;
 class Warrior extends Character{
     void taunt(){}
     void swingSword(){}
