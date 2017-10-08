@@ -1,8 +1,11 @@
 package Character;
 
-//import Skill;
+public abstract class AbstractCharacter implements CharacterInterface {
+    protected final int MOVE_UP = 1;
+    protected final int MOVE_RIGHT = 2;
+    protected final int MOVE_DOWN = 3;
+    protected final int MOVE_LEFT = 4;
 
-public abstract class AbstractCharacter {
     int hp;
     int mp;
     // int dmg;
@@ -21,28 +24,17 @@ public abstract class AbstractCharacter {
     void useSkillW() {
     }
 
-    void move() {
+    public void move(int a) {
+        switch (a) {
+            // @todo: moveup function
+            case MOVE_UP:
+            case MOVE_RIGHT:
+            case MOVE_LEFT:
+            case MOVE_DOWN:
+            default:
+        }
     }
 
     void unlockSkill() {
     }
 }
-
-// class Warrior extends Character{
-//     void taunt(){}
-//     void swingSword(){}
-// }
-
-// class Archer extends Character{
-//   void run(){}
-//   void rapidFire(){}
-// }
-
-// class Mage extends Character{
-//   void fireBall(){}
-//   void heal(){}
-// }
-
-// class Monster extends Character{
-//   void superAttack(){}
-// }
