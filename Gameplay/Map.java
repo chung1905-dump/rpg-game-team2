@@ -1,6 +1,6 @@
-package team2.rpg.Gameplay;
+package Gameplay;
 
-import team2.rpg.Gameplay.MapContent.Block;
+import Gameplay.MapContent.Block;
 
 public class Map {
     protected int id;

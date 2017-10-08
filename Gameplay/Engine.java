@@ -1,4 +1,4 @@
-package team2.rpg.Gameplay;
+package Gameplay;
 
 public class Engine {
     /**

@@ -1,4 +1,4 @@
-package team2.rpg.Gameplay.MapContent;
+package Gameplay.MapContent;
 
 public class Block {
     protected int id;
