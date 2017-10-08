@@ -1,5 +1,5 @@
-package team2.rpg.Character;
-abstract class Character{
+package Character;
+interface Character{
   int hp;
   int mp;
   // int dmg;
@@ -8,6 +8,8 @@ abstract class Character{
   String img_path;
   int id;
   void attack(){}
+  void useSkillQ(){}
+  void useSkillW(){}
   void move(){}
 }
 
