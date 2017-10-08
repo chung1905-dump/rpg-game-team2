@@ -1,4 +1,5 @@
 package Character;
+import Skill;
 interface Character{
   int hp;
   int mp;
@@ -7,10 +8,13 @@ interface Character{
   int speed;
   String img_path;
   int id;
+  Skill a;
+  
   void attack(){}
   void useSkillQ(){}
   void useSkillW(){}
   void move(){}
+  void unlockSkill(){}
 }
 
 // class Warrior extends Character{
