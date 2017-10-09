@@ -14,4 +14,4 @@ Bai tap lon nhom 2.
 
 ### Contribution guidelines ###
 
-* @package team2.rpg
+* all classes (character, skill, item) have to implements the interface

@@ -12,9 +12,45 @@ public interface CharacterInterface {
     public void move(int a);
 
     /**
-     * Normal attack to target
+     * currentPosition[0] = x;
+     * currentPosition[1] = y;
+     *
+     * @return
      */
-    public void attack(CharacterInterface[] target);
+    public int[] getCurrentPosition();
+
+    public void setCurrentPosition(int[] currentPosition);
+
+    /**
+     * Ability Power. Attack Damage
+     *
+     * @return
+     */
+    public int getAd();
+
+    public void setAd(int ad);
+
+    public int getAp();
+
+    public void setAp(int ap);
+
+
+    /**
+     * Normal attack to target(s)
+     */
+    public void attack(CharacterInterface[] targets);
+
+    /**
+     * Get all learned skill
+     * @return
+     */
+    public SkillInterface[] getSkills();
+
+    /**
+     * @notice: Temporary not available
+     * @param skill
+     */
+    public void learnSkill(SkillInterface skill);
 
     /**
      * Cast skill to target(s)
@@ -26,14 +62,10 @@ public interface CharacterInterface {
      */
     public int getExp();
 
+    // Add an amount of exp
+    public void gainExp(int exp);
+
     public int getLevel();
-
-    public void setLevel(int level);
-
-    /**
-     * Shortcut to setLevel(1);
-     */
-    public void levelUp();
 
     /**
      * HP & MP
@@ -61,8 +93,6 @@ public interface CharacterInterface {
      */
     public String getName();
 
-    public void setName(String name);
-
     /**
      * Types: fire, water, lighting, blah blah,...
      *
@@ -70,14 +100,10 @@ public interface CharacterInterface {
      */
     public String getTypeName();
 
-    public void setTypeName(String name);
-
     /**
      * Classes: warrior, wizard, blah blah,...
      *
      * @return
      */
     public String getClassName();
-
-    public void setClass(String className);
 }

@@ -1,6 +1,8 @@
 package Character.Class;
 
-class Warrior extends Character.AbstractCharacter {
+import Character.AbstractCharacter;
+
+class Warrior extends AbstractCharacter {
     int dmg;
 
     void taunt() {

@@ -1,11 +1,16 @@
 package Character.Class;
 
-class Archer extends Character.AbstractCharacter {
-    int dmg;
+import Character.AbstractCharacter;
+import Character.SkillInterface;
+import Character.Skill.*;
 
-    void run() {
-    }
+class Archer extends AbstractCharacter {
+    protected String className = "archer";
+    protected SkillInterface[] skills;
 
-    void rapidFire() {
+    public Archer(String name, String typeName) {
+        super(name, typeName);
+        this.className = "archer";
+        this.skills = new SkillInterface[]{new RapidFire()};
     }
 }
