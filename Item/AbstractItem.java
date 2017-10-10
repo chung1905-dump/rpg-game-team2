@@ -1,15 +1,24 @@
 package Item;
 
-public abstract class AbstractItem {
-    String img_path;
-    int id;
-    // int dmg;
-    int numOfUses;
+import Character.CharacterInterface;
 
-    void reduceNou() {
+public abstract class AbstractItem implements ItemInterface {
+    protected String name;
+    protected String description;
+
+    public String getName() {
+        return name;
     }
 
-    void spawn() {
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

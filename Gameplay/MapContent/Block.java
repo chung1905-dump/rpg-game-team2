@@ -13,11 +13,11 @@ public class Block {
         this.name = name;
     }
 
-    public String getImg_path() {
+    public String getImgPath() {
         return img_path;
     }
 
-    public void setImg_path(String img_path) {
+    public void setImgPath(String img_path) {
         this.img_path = img_path;
     }
 
