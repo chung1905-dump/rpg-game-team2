@@ -1,6 +1,7 @@
 package Character;
 import Skill;
-interface Character{
+interface Character{// Character gom cac thuoc tinh co ban nhu hp,mp,def,speed
+                        // va cac phuong thuc tan cong,su dung ky nang, di chuyen
   int hp;
   int mp;
   // int dmg;
@@ -9,12 +10,12 @@ interface Character{
   String img_path;
   int id;
   Skill a;
-  
-  void attack(){}
-  void useSkillQ(){}
-  void useSkillW(){}
-  void move(){}
-  void unlockSkill(){}
+
+  void attack()
+  void useSkillQ()
+  void useSkillW()
+  void move()
+  void unlockSkill()
 }
 
 // class Warrior extends Character{

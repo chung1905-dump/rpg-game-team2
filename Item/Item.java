@@ -6,7 +6,7 @@ interface Item{
   // int dmg;
   int numOfUses;
 
-  void reduceNou(){}
-  void spawn(){}
+  void reduceNou()
+  void spawn()
 
 }
