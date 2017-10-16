@@ -26,7 +26,7 @@ public class Board extends JPanel {
     public void paintComponent(Graphics g) {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
-                g.drawImage(content[x][y], x * 80, y * 80, null);
+                g.drawImage(content[y][x], x * 80, y * 80, null);
             }
         }
     }

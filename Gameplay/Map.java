@@ -11,9 +11,9 @@ public class Map {
             // put your new maps here
     };
     protected AbstractBlock[] allBlock = new AbstractBlock[]{
-            new GrassBlock(), //0
+            new RockBlock(), //0
             new WaterBlock(), //1
-            new RockBlock()   //2
+            new GrassBlock() //2
             // put your new blocks here
     };
     protected int id;
