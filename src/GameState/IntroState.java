@@ -3,8 +3,10 @@ package GameState;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import Manager.GameStateManager;
+
 import Main.GamePanel;
+import Manager.GameStateManager;
+import Manager.Keys;
 
 public class IntroState extends AbstractGameState {
     private BufferedImage logo;
@@ -23,9 +25,8 @@ public class IntroState extends AbstractGameState {
     public void init() {
         ticks = 0;
         try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/images/map/block/grass.png"));
-        }
-        catch(Exception e) {
+            logo = ImageIO.read(getClass().getResourceAsStream("/images/logo/logo.png"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -33,16 +34,16 @@ public class IntroState extends AbstractGameState {
     public void update() {
         handleInput();
         ticks++;
-        if(ticks < FADE_IN) {
+        if (ticks < FADE_IN) {
             alpha = (int) (255 - 255 * (1.0 * ticks / FADE_IN));
-            if(alpha < 0) alpha = 0;
+            if (alpha < 0) alpha = 0;
         }
-        if(ticks > FADE_IN + LENGTH) {
+        if (ticks > FADE_IN + LENGTH) {
             alpha = (int) (255 * (1.0 * ticks - FADE_IN - LENGTH) / FADE_OUT);
-            if(alpha > 255) alpha = 255;
+            if (alpha > 255) alpha = 255;
         }
-        if(ticks > FADE_IN + LENGTH + FADE_OUT) {
-//            gsm.setState(GameStateManager.OUTTRO);
+        if (ticks > FADE_IN + LENGTH + FADE_OUT) {
+            gsm.setState(GameStateManager.MENU);
         }
     }
 
@@ -55,9 +56,9 @@ public class IntroState extends AbstractGameState {
     }
 
     public void handleInput() {
-//        if(Keys.isPressed(Keys.ENTER)) {
-//            gsm.setState(GameStateManager.MENU);
-//        }
+        if (Keys.isPressed(Keys.ENTER)) {
+            gsm.setState(GameStateManager.MENU);
+        }
     }
 
 

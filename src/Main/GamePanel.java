@@ -2,11 +2,13 @@ package Main;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import Manager.GameStateManager;
+import Manager.*;
 
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, KeyListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 //    public static final float SCALE = 1;
@@ -48,9 +50,9 @@ public class GamePanel extends JPanel implements Runnable {
             draw();
             drawToScreen();
 
-            elapsed = System.nanoTime() - start;
+            elapsed = (System.nanoTime() - start) / 1000000;
 
-            wait = TARGET_TIME - elapsed / 1000000;
+            wait = TARGET_TIME - elapsed;
             if (wait < 0) wait = TARGET_TIME;
 
             try {
@@ -73,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
     // updates game
     private void update() {
         gsm.update();
-//        Keys.update();
+        Keys.update();
     }
 
     // draws game
@@ -92,9 +94,22 @@ public class GamePanel extends JPanel implements Runnable {
     public void addNotify() {
         super.addNotify();
         if (thread == null) {
+            addKeyListener(this);
             thread = new Thread(this);
             thread.start();
         }
+    }
+
+    // key event
+    public void keyTyped(KeyEvent key) {
+    }
+
+    public void keyPressed(KeyEvent key) {
+        Keys.keySet(key.getKeyCode(), true);
+    }
+
+    public void keyReleased(KeyEvent key) {
+        Keys.keySet(key.getKeyCode(), false);
     }
 
 //    public void paintComponent(Graphics g) {
