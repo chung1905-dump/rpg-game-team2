@@ -13,6 +13,7 @@ public class Content {
     public static BufferedImage[][] MENUBG = load("/images/HUD/8-bit-mushroom.jpg", 800, 800);
 
     public static BufferedImage[][] DIAMOND = load("/images/HUD/diamond.png", 80, 80);
+    public static BufferedImage[][] PLAYER = load("/images/sprites/playersprites.gif", 16, 16);
 
     public static BufferedImage[][] font = load("/images/HUD/font.gif", 8, 8);
 

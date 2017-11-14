@@ -141,8 +141,41 @@ public class TileMap {
                 );
             }
         }
-
     }
 
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getx() {
+        return x;
+    }
+
+    public int gety() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public int getType(int row, int col) {
+        int rc = map[row][col];
+        int r = rc / numTilesAcross;
+        int c = rc % numTilesAcross;
+        return tiles[r][c].getType();
+    }
 
 }
