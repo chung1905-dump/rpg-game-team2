@@ -8,9 +8,11 @@ public class GameStateManager {
     private int currentState;
     private int previousState;
 
-    public static final int NUM_STATES = 2;
+    public static final int NUM_STATES = 3;
     public static final int INTRO = 0;
     public static final int MENU = 1;
+    public static final int PLAY = 2;
+
 
     public GameStateManager() {
         gameStates = new AbstractGameState[NUM_STATES];
@@ -26,6 +28,9 @@ public class GameStateManager {
             gameStates[i].init();
         } else if (i == MENU) {
             gameStates[i] = new MenuState(this);
+            gameStates[i].init();
+        } else if (i == PLAY) {
+            gameStates[i] = new PlayState(this);
             gameStates[i].init();
         }
     }

@@ -55,7 +55,7 @@ public class MenuState extends AbstractGameState {
 
     private void selectOption() {
         if(currentOption == 0) {
-//            gsm.setState(GameStateManager.PLAY);
+            gsm.setState(GameStateManager.PLAY);
         }
         if(currentOption == 1) {
             System.exit(0);
