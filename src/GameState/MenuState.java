@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import Manager.GameStateManager;
 import Manager.Content;
+import Manager.Keys;
 
 public class MenuState extends AbstractGameState {
     private BufferedImage bg;
@@ -41,6 +42,25 @@ public class MenuState extends AbstractGameState {
     }
 
     public void handleInput() {
+        if(Keys.isPressed(Keys.DOWN) && currentOption < options.length - 1) {
+            currentOption++;
+        }
+        if(Keys.isPressed(Keys.UP) && currentOption > 0) {
+            currentOption--;
+        }
+        if(Keys.isPressed(Keys.ENTER)) {
+            selectOption();
+        }
     }
+
+    private void selectOption() {
+        if(currentOption == 0) {
+//            gsm.setState(GameStateManager.PLAY);
+        }
+        if(currentOption == 1) {
+            System.exit(0);
+        }
+    }
+
 
 }
