@@ -12,7 +12,7 @@ public class TestMap extends AbstractMap {
     private final int numCols = 10;
     private final int numRows = 10;
 
-    private final Color backgroundColor = Color.green;
+    private final Color backgroundColor = new Color(166,226,107);
 
     private int rawMapData[][];
     private AbstractTile tiles[];
