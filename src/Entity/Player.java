@@ -1,40 +1,42 @@
 package Entity;
 
+import Entity.Skill.AbstractSkill;
+import Entity.Skill.Punch;
 import Tool.Collision;
 import Tool.Keys;
 import Map.AbstractMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Player extends AbstractEntity {
+public class Player extends AbstractCharacter {
     final private String imgPath = "/entity/character/character.png";
     private static BufferedImage img[][];
     private AbstractMap map;
     private int moveSpeed = 8;
 
-    private final int UP = 0;
-    private final int DOWN = 1;
-    private final int RIGHT = 2;
-    private final int LEFT = 3;
-
-    private int facing = DOWN;
     private int moveStep = 0;
     private boolean isMoving = false;
 
-    private int width;
-    private int height;
-
-    private int currentX;
-    private int currentY;
+    private AbstractSkill skills[];
+    private ArrayList<AbstractSkill> currentActiveSkills = new ArrayList<>();
 
     public Player(AbstractMap m) {
+        facing = AbstractCharacter.DOWN;
         map = m;
         width = map.getTileWidth() * 4 / 5;
         height = map.getTileHeight() * 4 / 5;
         currentX = map.getDefaultPosition()[0] * width * 5 / 4;
         currentY = map.getDefaultPosition()[1] * height * 5 / 4;
+        loadSkill();
         loadSprites();
+    }
+
+    private void loadSkill() {
+        skills = new AbstractSkill[1];
+        skills[0] = new Punch();
     }
 
     private void loadSprites() {
@@ -81,6 +83,13 @@ public class Player extends AbstractEntity {
 
     public void update() {
         handleInput();
+        for (int i = 0; i < currentActiveSkills.size(); i++) {
+            AbstractSkill e = currentActiveSkills.get(i);
+            e.update();
+            if (e.isEnd()) {
+                currentActiveSkills.remove(i);
+            }
+        }
     }
 
     private void handleInput() {
@@ -96,6 +105,9 @@ public class Player extends AbstractEntity {
         }
         if (Keys.isDown(Keys.LEFT)) {
             move(LEFT, moveSpeed);
+        }
+        if (Keys.isPressed(Keys.SPACE)) {
+            currentActiveSkills.add(skills[0].init(this));
         }
         if (!isMoving) {
             moveStep = 0;
@@ -135,8 +147,16 @@ public class Player extends AbstractEntity {
         }
     }
 
+    @Override
+    public void die() {
+    }
+
     // need fix
     public void draw(Graphics2D g) {
         g.drawImage(getImg(), currentX, currentY, width, height, null);
+        // warning 2 same loop
+        for (AbstractSkill e : currentActiveSkills) {
+            e.draw(g);
+        }
     }
 }

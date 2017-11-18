@@ -7,6 +7,7 @@ public final class Keys {
     private static final int NUM_KEYS = 8;
 
     private static boolean keyState[] = new boolean[NUM_KEYS];
+    public static boolean prevKeyState[] = new boolean[NUM_KEYS];
 
     public static int UP = 0;
     public static int LEFT = 1;
@@ -16,6 +17,10 @@ public final class Keys {
     public static int ENTER = 5;
     public static int ESCAPE = 6;
     public static int F1 = 7;
+
+    public static void update() {
+        System.arraycopy(keyState, 0, prevKeyState, 0, NUM_KEYS);
+    }
 
     public static void keySet(int i, boolean b) {
         if (i == KeyEvent.VK_UP) keyState[UP] = b;
@@ -31,4 +36,16 @@ public final class Keys {
     public static boolean isDown(int i) {
         return keyState[i];
     }
+
+    //need prune
+    public static boolean isPressed(int i) {
+        if (keyState[i]) {
+//            System.out.print(keyState[i]);
+//            System.out.println(prevKeyState[i]);
+            return !prevKeyState[i];
+        }
+        return false;
+    }
+
+
 }

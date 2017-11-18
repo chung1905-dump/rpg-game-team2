@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     private void update() {
         gsm.getCurrent().update();
+        Keys.update();
     }
 
     private void draw() {
