@@ -1,20 +1,25 @@
 package Map;
 
-import Interface.Blockable;
+import Entity.AbstractCharacter;
+import Entity.Monster1;
+import Interface.BlockTile;
 import Main.GamePanel;
 import Map.Tiles.*;
-import Tool.Collision;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TestMap extends AbstractMap {
     //define col x row
     private final int numCols = 10;
     private final int numRows = 10;
 
-    private final Color backgroundColor = new Color(166,226,107);
+    //background color
+    private final Color backgroundColor = new Color(166, 226, 107);
 
+    //contains array of integer 0, 2, 3
     private int rawMapData[][];
+    //tiles are used in map
     private AbstractTile tiles[];
     private int tileWidth;
     private int tileHeight;
@@ -23,7 +28,6 @@ public class TestMap extends AbstractMap {
     private final int GRASS_TILE = 0;
     private final int WATER_TILE = 1;
     private final int TREE_TILE = 2;
-
 
     public TestMap() {
         tiles = new AbstractTile[NUM_TILES];
@@ -47,22 +51,36 @@ public class TestMap extends AbstractMap {
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
         };
 
+        //save tiles blocking player's movement
+        blockRectangles = new ArrayList<>();
         for (int x = 0; x < numCols; x++) {
             for (int y = 0; y < numRows; y++) {
-                if (tiles[rawMapData[y][x]] instanceof Blockable) {
-                    Collision.addBlock(
-                            (Blockable) tiles[rawMapData[y][x]],
+                if (tiles[rawMapData[y][x]] instanceof BlockTile) {
+                    addBlock(
                             new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
                     );
                 }
             }
         }
 
+        //init monsters
+        monsters = new ArrayList<>();
+        monsters.add(new Monster1(1 * tileWidth, 3 * tileHeight));
+        monsters.add(new Monster1(2 * tileWidth, 4 * tileHeight));
+        monsters.add(new Monster1(7 * tileWidth, 5 * tileHeight));
+        monsters.add(new Monster1(3 * tileWidth, 3 * tileHeight));
     }
+
 
     @Override
     public void update() {
-
+        for (int i = 0; i < monsters.size(); i++) {
+            AbstractCharacter m = monsters.get(i);
+            m.update();
+            if (m.isDie()) {
+                monsters.remove(m);
+            }
+        }
     }
 
     @Override
@@ -77,6 +95,9 @@ public class TestMap extends AbstractMap {
             for (int y = 0; y < numRows; y++) {
                 tiles[rawMapData[y][x]].draw(g, x, y, tileWidth, tileHeight);
             }
+        }
+        for (AbstractCharacter m : monsters) {
+            m.draw(g);
         }
     }
 

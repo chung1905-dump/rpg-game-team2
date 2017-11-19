@@ -1,11 +1,11 @@
 package Map.Tiles;
 
-import Interface.Blockable;
+import Interface.BlockTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Water extends AbstractTile implements Blockable {
+public class Water extends AbstractTile implements BlockTile {
     private static BufferedImage img;
 
     public Water () {

@@ -1,15 +1,14 @@
 package Entity;
 
 import Entity.Skill.AbstractSkill;
+import Entity.Skill.Firebow;
 import Entity.Skill.Punch;
-import Tool.Collision;
 import Tool.Keys;
 import Map.AbstractMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Player extends AbstractCharacter {
     final private String imgPath = "/entity/character/character.png";
@@ -24,19 +23,21 @@ public class Player extends AbstractCharacter {
     private ArrayList<AbstractSkill> currentActiveSkills = new ArrayList<>();
 
     public Player(AbstractMap m) {
+        hp = 10;
         facing = AbstractCharacter.DOWN;
         map = m;
         width = map.getTileWidth() * 4 / 5;
         height = map.getTileHeight() * 4 / 5;
-        currentX = map.getDefaultPosition()[0] * width * 5 / 4;
-        currentY = map.getDefaultPosition()[1] * height * 5 / 4;
+        currentX = map.getDefaultPosition()[0] * map.getTileWidth();// * 5 / 4;
+        currentY = map.getDefaultPosition()[1] * map.getTileHeight();//* 5 / 4;
         loadSkill();
         loadSprites();
     }
 
     private void loadSkill() {
-        skills = new AbstractSkill[1];
+        skills = new AbstractSkill[2];
         skills[0] = new Punch();
+        skills[1] = new Firebow();
     }
 
     private void loadSprites() {
@@ -107,7 +108,10 @@ public class Player extends AbstractCharacter {
             move(LEFT, moveSpeed);
         }
         if (Keys.isPressed(Keys.SPACE)) {
-            currentActiveSkills.add(skills[0].init(this));
+            currentActiveSkills.add(skills[0].init(this)); //space to use skill 1
+        }
+        if (Keys.isPressed(Keys.ESCAPE)) {
+            currentActiveSkills.add(skills[1].init(this)); //esc to use skill 2
         }
         if (!isMoving) {
             moveStep = 0;
@@ -122,25 +126,25 @@ public class Player extends AbstractCharacter {
         switch (i) {
             case UP:
                 dest = currentY - speed;
-                if (!Collision.isBlock(new Rectangle(currentX, dest, width, height))) {
+                if (!this.map.isBlock(new Rectangle(currentX, dest, width, height))) {
                     currentY = dest;
                 }
                 break;
             case DOWN:
                 dest = currentY + speed;
-                if (!Collision.isBlock(new Rectangle(currentX, dest, width, height))) {
+                if (!this.map.isBlock(new Rectangle(currentX, dest, width, height))) {
                     currentY = dest;
                 }
                 break;
             case LEFT:
                 dest = currentX - speed;
-                if (!Collision.isBlock(new Rectangle(dest, currentY, width, height))) {
+                if (!this.map.isBlock(new Rectangle(dest, currentY, width, height))) {
                     currentX = dest;
                 }
                 break;
             case RIGHT:
                 dest = currentX + speed;
-                if (!Collision.isBlock(new Rectangle(dest, currentY, width, height))) {
+                if (!this.map.isBlock(new Rectangle(dest, currentY, width, height))) {
                     currentX = dest;
                 }
                 break;
@@ -148,7 +152,8 @@ public class Player extends AbstractCharacter {
     }
 
     @Override
-    public void die() {
+    public boolean isDie() {
+        return false;
     }
 
     // need fix

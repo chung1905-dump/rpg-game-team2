@@ -1,5 +1,7 @@
 package Entity;
 
+import java.awt.*;
+
 abstract public class AbstractCharacter {
     protected int facing;
 
@@ -7,6 +9,8 @@ abstract public class AbstractCharacter {
     public static final int DOWN = 1;
     public static final int RIGHT = 2;
     public static final int LEFT = 3;
+
+    protected int hp;
 
     protected int width;
     protected int height;
@@ -34,5 +38,19 @@ abstract public class AbstractCharacter {
         return facing;
     }
 
-    abstract public void die();
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public boolean isDie() {
+        return hp <= 0;
+    }
+
+    abstract public void update();
+
+    abstract public void draw(Graphics2D g);
 }

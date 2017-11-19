@@ -1,38 +1,39 @@
 package Entity.Skill;
 
 import Entity.AbstractCharacter;
+import Main.GamePanel;
 import Manager.TileMapManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Punch extends AbstractSkill {
+public class Firebow extends AbstractSkill {
     private AbstractCharacter source;
-
-    private int during;
+    private int facing;
+    private int speed = 12;
     // x, y, w, h for drawing purpose
 //    private int x;
 //    private int y;
-    private final int w = 30;
-    private final int h = 30;
+    private final int w = 70;
+    private final int h = 70;
     // rectangle for collision checking
     private Rectangle rectangle;
 
     private static BufferedImage img;
 
-    public Punch() {
+    public Firebow() {
         if (img == null) {
-            img = Tool.Image.loadImage("/entity/skills/punch.png");
+            img = Tool.Image.loadImage("/entity/skills/firebow.png");
         }
     }
 
     @Override
-    public Punch init(AbstractCharacter character) {
+    public Firebow init(AbstractCharacter character) {
         int x = 0, y = 0;
-        Punch ret = new Punch();
+        Firebow ret = new Firebow();
         ret.source = character;
-        ret.during = 0;
+        ret.facing = character.getFacing();
         switch (character.getFacing()) {
             case AbstractCharacter.UP:
                 x = character.getX() + character.getWidth() / 2 - w / 2;
@@ -62,7 +63,20 @@ public class Punch extends AbstractSkill {
 
     @Override
     public void update() {
-        this.during++;
+        switch (facing) {
+            case AbstractCharacter.UP:
+                rectangle.setLocation((int) rectangle.getX(), (int) rectangle.getY() - speed);
+                break;
+            case AbstractCharacter.DOWN:
+                rectangle.setLocation((int) rectangle.getX(), (int) rectangle.getY() + speed);
+                break;
+            case AbstractCharacter.LEFT:
+                rectangle.setLocation((int) rectangle.getX() - speed, (int) rectangle.getY());
+                break;
+            case AbstractCharacter.RIGHT:
+                rectangle.setLocation((int) rectangle.getX() + speed, (int) rectangle.getY());
+                break;
+        }
         ArrayList<AbstractCharacter> mons = TileMapManager.getCurrent().getMonsters();
         for (AbstractCharacter m : mons) {
             if (rectangle.intersects(new Rectangle(m.getX(), m.getY(), m.getWidth(), m.getHeight()))) {
@@ -80,6 +94,11 @@ public class Punch extends AbstractSkill {
 
     @Override
     public boolean isEnd() {
-        return during > 1;
+        return (rectangle.getX() < -w ||
+                rectangle.getX() > GamePanel.WIDTH ||
+                rectangle.getY() < -h ||
+                rectangle.getY() > GamePanel.HEIGHT
+
+        );
     }
 }

@@ -7,21 +7,22 @@ import Manager.GameStateManager;
 import Manager.TileMapManager;
 
 public class PlayState extends AbstractGameState {
-    private TileMapManager mapManager;
+//    private static TileMapManager mapManager;
     private Player player;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        mapManager = new TileMapManager();
-        player = new Player(mapManager.getCurrent());
+        TileMapManager.init();
+        player = new Player(TileMapManager.getCurrent());
     }
 
     public void update() {
+        TileMapManager.update();
         player.update();
     }
 
     public void draw(Graphics2D g) {
-        mapManager.getCurrent().draw(g);
+        TileMapManager.getCurrent().draw(g);
         player.draw(g);
     }
 
