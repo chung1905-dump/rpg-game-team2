@@ -63,7 +63,10 @@ public class TestMap extends AbstractMap {
             }
         }
 
-        //init monsters
+        initMonsters();
+    }
+
+    private void initMonsters() {
         monsters = new ArrayList<>();
         monsters.add(new Monster1(1 * tileWidth, 3 * tileHeight));
         monsters.add(new Monster1(2 * tileWidth, 4 * tileHeight));

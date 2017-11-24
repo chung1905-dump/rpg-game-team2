@@ -12,8 +12,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 
-    private final int FPS = 30;
-    private final long TARGET_TIME = 1000 / FPS; // target time in milisecond
+    public static final int FPS = 30;
+    private static final long TARGET_TIME = 1000 / FPS; // target time in milliseconds
 
     private Thread thread;
     private BufferedImage i;
@@ -36,13 +36,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         long wait;
 
         while (true) {
-            start = System.nanoTime(); //start time in nanosecond
+            start = System.currentTimeMillis(); //start time in milliseconds
 
             update();
             draw();
 
-            elapsed = (System.nanoTime() - start) / 1000000; //elapsed time in milisecond
-            wait = TARGET_TIME - elapsed; //waittime in milisecond
+            elapsed = System.currentTimeMillis() - start; //elapsed time in milliseconds
+            wait = TARGET_TIME - elapsed; //wait time in milliseconds
             if (wait < 0) {
                 wait = TARGET_TIME;
             }

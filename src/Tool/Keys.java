@@ -7,7 +7,7 @@ public final class Keys {
     private static final int NUM_KEYS = 8;
 
     private static boolean keyState[] = new boolean[NUM_KEYS];
-    public static boolean prevKeyState[] = new boolean[NUM_KEYS];
+    private static boolean prevKeyState[] = new boolean[NUM_KEYS];
 
     public static int UP = 0;
     public static int LEFT = 1;
@@ -39,12 +39,7 @@ public final class Keys {
 
     //need prune
     public static boolean isPressed(int i) {
-        if (keyState[i]) {
-//            System.out.print(keyState[i]);
-//            System.out.println(prevKeyState[i]);
-            return !prevKeyState[i];
-        }
-        return false;
+        return keyState[i] && !prevKeyState[i];
     }
 
 

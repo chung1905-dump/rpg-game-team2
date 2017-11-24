@@ -3,6 +3,7 @@ package Entity;
 import Entity.Skill.AbstractSkill;
 import Entity.Skill.Firebow;
 import Entity.Skill.Punch;
+import Main.GamePanel;
 import Tool.Keys;
 import Map.AbstractMap;
 
@@ -14,7 +15,7 @@ public class Player extends AbstractCharacter {
     final private String imgPath = "/entity/character/character.png";
     private static BufferedImage img[][];
     private AbstractMap map;
-    private int moveSpeed = 8;
+    private int moveSpeed = 160;
 
     private int moveStep = 0;
     private boolean isMoving = false;
@@ -26,6 +27,7 @@ public class Player extends AbstractCharacter {
         hp = 10;
         facing = AbstractCharacter.DOWN;
         map = m;
+        // scale character to 4/5 a block tile
         width = map.getTileWidth() * 4 / 5;
         height = map.getTileHeight() * 4 / 5;
         currentX = map.getDefaultPosition()[0] * map.getTileWidth();// * 5 / 4;
@@ -79,7 +81,7 @@ public class Player extends AbstractCharacter {
         if (!isMoving) {
             return img[facing][0];
         }
-        return img[facing][moveStep / 8 % 2 + 1];
+        return img[facing][moveStep / (GamePanel.FPS / 3) % 2 + 1];
     }
 
     public void update() {
@@ -96,16 +98,16 @@ public class Player extends AbstractCharacter {
     private void handleInput() {
         isMoving = false;
         if (Keys.isDown(Keys.UP)) {
-            move(UP, moveSpeed);
+            move(UP, getMoveSpeed());
         }
         if (Keys.isDown(Keys.DOWN)) {
-            move(DOWN, moveSpeed);
+            move(DOWN, getMoveSpeed());
         }
         if (Keys.isDown(Keys.RIGHT)) {
-            move(RIGHT, moveSpeed);
+            move(RIGHT, getMoveSpeed());
         }
         if (Keys.isDown(Keys.LEFT)) {
-            move(LEFT, moveSpeed);
+            move(LEFT, getMoveSpeed());
         }
         if (Keys.isPressed(Keys.SPACE)) {
             currentActiveSkills.add(skills[0].init(this)); //space to use skill 1
@@ -154,6 +156,10 @@ public class Player extends AbstractCharacter {
     @Override
     public boolean isDie() {
         return false;
+    }
+
+    public int getMoveSpeed() {
+        return moveSpeed / GamePanel.FPS;
     }
 
     // need fix
