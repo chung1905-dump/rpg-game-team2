@@ -8,6 +8,7 @@ import Tool.Keys;
 import Map.AbstractMap;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -22,6 +23,9 @@ public class Player extends AbstractCharacter {
 
     private AbstractSkill skills[];
     private ArrayList<AbstractSkill> currentActiveSkills = new ArrayList<>();
+
+    private int PUNCH = 0;
+    private int FIRE_BOW = 1;
 
     public Player(AbstractMap m) {
         hp = 10;
@@ -38,8 +42,8 @@ public class Player extends AbstractCharacter {
 
     private void loadSkill() {
         skills = new AbstractSkill[2];
-        skills[0] = new Punch();
-        skills[1] = new Firebow();
+        skills[PUNCH] = new Punch();
+        skills[FIRE_BOW] = new Firebow();
     }
 
     private void loadSprites() {
@@ -97,23 +101,23 @@ public class Player extends AbstractCharacter {
 
     private void handleInput() {
         isMoving = false;
-        if (Keys.isDown(Keys.UP)) {
+        if (Keys.isDown(KeyEvent.VK_UP)) {
             move(UP, getMoveSpeed());
         }
-        if (Keys.isDown(Keys.DOWN)) {
+        if (Keys.isDown(KeyEvent.VK_DOWN)) {
             move(DOWN, getMoveSpeed());
         }
-        if (Keys.isDown(Keys.RIGHT)) {
+        if (Keys.isDown(KeyEvent.VK_RIGHT)) {
             move(RIGHT, getMoveSpeed());
         }
-        if (Keys.isDown(Keys.LEFT)) {
+        if (Keys.isDown(KeyEvent.VK_LEFT)) {
             move(LEFT, getMoveSpeed());
         }
-        if (Keys.isPressed(Keys.SPACE)) {
-            currentActiveSkills.add(skills[0].init(this)); //space to use skill 1
+        if (Keys.isPressed(KeyEvent.VK_SPACE)) {
+            currentActiveSkills.add(skills[PUNCH].init(this)); //space to use punch
         }
-        if (Keys.isPressed(Keys.ESCAPE)) {
-            currentActiveSkills.add(skills[1].init(this)); //esc to use skill 2
+        if (Keys.isPressed(KeyEvent.VK_Q)) {
+            currentActiveSkills.add(skills[FIRE_BOW].init(this)); //Q to use firebow
         }
         if (!isMoving) {
             moveStep = 0;
