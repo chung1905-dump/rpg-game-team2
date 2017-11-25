@@ -29,10 +29,10 @@ public class GameStateManager {
             gameStates[i] = new MenuState(this);
             gameStates[i].init();
         }
-//        else if (i == PLAY){
-//            gameStates[i] = new PlayState(this);
-//            gameStates[i].init();
-//        }
+        else if (i == PLAY){
+            gameStates[i] = new PlayState(this);
+            gameStates[i].init();
+        }
     }
     public void unloadState(int i){
         gameStates[i] = null;

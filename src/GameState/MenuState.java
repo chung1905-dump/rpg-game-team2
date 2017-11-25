@@ -33,10 +33,12 @@ public class MenuState extends AbstractGameState{
 
     public void draw(Graphics2D g){
         g.drawImage(bg,0,0,null);
-        Content.drawString(g, options[0],350,190);
-        Content.drawString(g,options[1],350,220);
-        if (currentOption == 0) g.drawImage(diamond,325,194,20,20,null);
-        else if (currentOption == 1) g.drawImage(diamond,325,224,20,20,null);
+
+        Content.drawString(g, options[0],330,270);
+        Content.drawString(g,options[1],330,300);
+
+        if (currentOption == 0) g.drawImage(diamond,310,270,20,20,null);
+        else if (currentOption == 1) g.drawImage(diamond,310,300,20,20,null);
     }
 
     public void handleInput(){

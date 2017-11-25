@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 public class Content{
-
-    public static BufferedImage[][] MENUBG = load("/images/HUD/2.png", 800, 800);
+   // public static BufferedImage[][] TITLE= load();
+    public static BufferedImage[][] MENUBG = load("/images/HUD/poster.png", 800, 800);
     public static BufferedImage[][] DIAMOND = load("/images/HUD/fire1.gif", 80, 80);
     public static BufferedImage[][] PLAYER = load("/images/sprites/playersprites.gif", 16, 16);
     public static BufferedImage[][] font = load("/images/HUD/font.gif", 8, 8);
