@@ -17,7 +17,7 @@ public class Firebow extends AbstractSkill {
 //    private int y;
     private final int w = 70;
     private final int h = 70;
-    // rectangle for collision checking
+    // rectaecking
     private Rectangle rectangle;
 
     private static BufferedImage img;

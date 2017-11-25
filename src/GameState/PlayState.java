@@ -16,6 +16,11 @@ public class PlayState extends AbstractGameState {
         player = new Player(TileMapManager.getCurrent());
     }
 
+    @Override
+    public void init() {
+
+    }
+
     public void update() {
         TileMapManager.update();
         player.update();
@@ -24,6 +29,11 @@ public class PlayState extends AbstractGameState {
     public void draw(Graphics2D g) {
         TileMapManager.getCurrent().draw(g);
         player.draw(g);
+    }
+
+    @Override
+    public void handleInput() {
+
     }
 
 }

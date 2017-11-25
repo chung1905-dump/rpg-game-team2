@@ -1,97 +1,106 @@
 package Main;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import Manager.*;
-import Tool.Keys;
+import  Manager.*;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 
-    private final int FPS = 30;
-    private final long TARGET_TIME = 1000 / FPS; // target time in milisecond
+    //cong cu ve
+    private BufferedImage image;
+    private Graphics2D g;
 
-    private Thread thread;
-    private BufferedImage i;
-    public Graphics2D g;
-
+    //game tate manager
     private GameStateManager gsm;
 
-    public GamePanel() {
+    //game loop stuff
+    private Thread thread;
+    private boolean running;
+    private final int FPS = 60;
+    private final int TARGET_TIME = 1000/FPS;
+
+    public GamePanel(){
         super();
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setFocusable(true);
         requestFocus();
     }
+    public void run(){
 
-    public void run() {
         init();
 
         long start;
         long elapsed;
         long wait;
 
-        while (true) {
-            start = System.nanoTime(); //start time in nanosecond
+        //game loop:vong lap
+        while(running){
+            start = System.nanoTime();
 
             update();
             draw();
+            drawToScreen();
 
-            elapsed = (System.nanoTime() - start) / 1000000; //elapsed time in milisecond
-            wait = TARGET_TIME - elapsed; //waittime in milisecond
-            if (wait < 0) {
-                wait = TARGET_TIME;
-            }
+            elapsed = (System.nanoTime()-start)/1000000;
 
-            try {
+            wait = TARGET_TIME - elapsed;
+            if(wait<0) wait=TARGET_TIME;
+
+            try{
                 Thread.sleep(wait);
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
-
-    private void init() {
-        i = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        g = (Graphics2D) i.getGraphics();
+    //initializes fields : khoi tao cac truong
+    private void init(){
+        running = true;
+        image = new BufferedImage(WIDTH,HEIGHT,1);// tạo 1 ảnh đục
+        g = (Graphics2D) image.getGraphics();
         gsm = new GameStateManager();
     }
-
-    private void update() {
-        gsm.getCurrent().update();
-        Keys.update();
+    //update game
+    private void update(){
+        gsm.update();
+//        Keys.update();
     }
 
-    private void draw() {
-        gsm.getCurrent().draw(g);
-        Graphics g2 = this.getGraphics();
-        g2.drawImage(i, 0, 0, WIDTH, HEIGHT, null);
-        g2.dispose();
+    //draws game
+    private void draw(){
+        gsm.draw(g);
     }
-
-    // ready to display
-    public void addNotify() {
+    //copy buff to screen
+    private void drawToScreen(){
+        Graphics g2 = getGraphics();
+        g2.drawImage(image,0,0,WIDTH,HEIGHT,null);
+        g2.dispose();//ngat tien trinh
+    }
+    //ready to display
+    public void addNotify(){
         super.addNotify();
-        if (thread == null) {
+        if(thread == null){
             addKeyListener(this);
             thread = new Thread(this);
             thread.start();
         }
     }
+    //key event
+    public void keyTyped(KeyEvent key){
 
-    public void keyTyped(KeyEvent key) {
     }
-
-    public void keyPressed(KeyEvent key) {
+    public  void keyPressed(KeyEvent key){
         Keys.keySet(key.getKeyCode(), true);
     }
-
     public void keyReleased(KeyEvent key) {
+
         Keys.keySet(key.getKeyCode(), false);
     }
-
 }
