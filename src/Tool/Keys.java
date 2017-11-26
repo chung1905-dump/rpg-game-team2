@@ -1,7 +1,5 @@
 package Tool;
 
-import java.awt.event.KeyEvent;
-
 public final class Keys {
 
     private static final int NUM_KEYS = 91;
@@ -21,7 +19,6 @@ public final class Keys {
         return keyState[i];
     }
 
-    //need prune
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
     }

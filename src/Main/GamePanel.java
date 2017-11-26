@@ -1,14 +1,16 @@
 package Main;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import Manager.*;
 import Tool.Keys;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 
@@ -19,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private BufferedImage i;
     public Graphics2D g;
 
+    //game state manager
     private GameStateManager gsm;
 
     public GamePanel() {
@@ -29,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void run() {
+
         init();
 
         long start;
@@ -40,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
             update();
             draw();
+            drawToScreen();
 
             elapsed = System.currentTimeMillis() - start; //elapsed time in milliseconds
             wait = TARGET_TIME - elapsed; //wait time in milliseconds
@@ -55,25 +60,32 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
+    //initializes fields
     private void init() {
         i = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) i.getGraphics();
         gsm = new GameStateManager();
     }
 
+    //update game
     private void update() {
-        gsm.getCurrent().update();
+        gsm.update();
         Keys.update();
     }
 
+    //draws game
     private void draw() {
-        gsm.getCurrent().draw(g);
-        Graphics g2 = this.getGraphics();
+        gsm.draw(g);
+    }
+
+    //copy buff to screen
+    private void drawToScreen() {
+        Graphics g2 = getGraphics();
         g2.drawImage(i, 0, 0, WIDTH, HEIGHT, null);
         g2.dispose();
     }
 
-    // ready to display
+    //ready to display
     public void addNotify() {
         super.addNotify();
         if (thread == null) {
@@ -83,7 +95,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
+    //key event
     public void keyTyped(KeyEvent key) {
+
     }
 
     public void keyPressed(KeyEvent key) {
@@ -91,7 +105,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void keyReleased(KeyEvent key) {
+
         Keys.keySet(key.getKeyCode(), false);
     }
-
 }
