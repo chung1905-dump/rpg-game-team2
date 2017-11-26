@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 public class Monster1 extends AbstractCharacter {
     private static BufferedImage img;
 
-    public Monster1(int x, int y) {
+    public Monster1(int x, int y, int w, int h) {
         hp = 10;
         //x,y,w,h
-        currentX = x;
-        currentY = y;
+        currentX = x * w;
+        currentY = y * h;
         width = 64;
         height = 64;
         //load img

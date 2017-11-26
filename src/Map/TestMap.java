@@ -4,7 +4,10 @@ import Entity.AbstractCharacter;
 import Entity.Monster1;
 import Interface.BlockTile;
 import Main.GamePanel;
-import Map.Tiles.*;
+import Map.Tiles.AbstractTile;
+import Map.Tiles.Grass;
+import Map.Tiles.Tree;
+import Map.Tiles.Water;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,18 +19,16 @@ public class TestMap extends AbstractMap {
 
     //background color
     private final Color backgroundColor = new Color(166, 226, 107);
-
+    private final int NUM_TILES = 3;
+    private final int GRASS_TILE = 0;
+    private final int WATER_TILE = 1;
+    private final int TREE_TILE = 2;
     //contains array of integer 0, 2, 3
     private int rawMapData[][];
     //tiles are used in map
     private AbstractTile tiles[];
     private int tileWidth;
     private int tileHeight;
-
-    private final int NUM_TILES = 3;
-    private final int GRASS_TILE = 0;
-    private final int WATER_TILE = 1;
-    private final int TREE_TILE = 2;
 
     public TestMap() {
         tiles = new AbstractTile[NUM_TILES];
@@ -68,10 +69,10 @@ public class TestMap extends AbstractMap {
 
     private void initMonsters() {
         monsters = new ArrayList<>();
-        monsters.add(new Monster1(1 * tileWidth, 3 * tileHeight));
-        monsters.add(new Monster1(2 * tileWidth, 4 * tileHeight));
-        monsters.add(new Monster1(7 * tileWidth, 5 * tileHeight));
-        monsters.add(new Monster1(3 * tileWidth, 3 * tileHeight));
+        monsters.add(new Monster1(1, 3, tileWidth, tileHeight));
+        monsters.add(new Monster1(2, 4, tileWidth, tileHeight));
+        monsters.add(new Monster1(7, 5, tileWidth, tileHeight));
+        monsters.add(new Monster1(3, 3, tileWidth, tileHeight));
     }
 
 

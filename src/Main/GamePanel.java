@@ -1,26 +1,23 @@
 package Main;
 
-import javax.swing.JPanel;
+import Manager.GameStateManager;
+import Tool.Keys;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import Manager.*;
-import Tool.Keys;
-
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
-
-    public static final int FPS = 30;
+    public static final int FPS = 30; // can't change it now
     private static final long TARGET_TIME = 1000 / FPS; // target time in milliseconds
-
+    private static GamePanel instance;
+    public Graphics2D g;
     private Thread thread;
     private BufferedImage i;
-    public Graphics2D g;
-
     //game state manager
     private GameStateManager gsm;
 

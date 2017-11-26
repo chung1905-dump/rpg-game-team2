@@ -1,13 +1,13 @@
 package GameState;
 
-import java.awt.*;
-
 import Entity.Player;
 import Manager.GameStateManager;
 import Manager.TileMapManager;
 
+import java.awt.*;
+
 public class PlayState extends AbstractGameState {
-//    private static TileMapManager mapManager;
+    //    private static TileMapManager mapManager;
     private Player player;
 
     public PlayState(GameStateManager gsm) {

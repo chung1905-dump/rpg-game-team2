@@ -9,18 +9,17 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Firebow extends AbstractSkill {
-    private AbstractCharacter source;
-    private int facing;
-    private int speed = 12;
+    private static BufferedImage img;
     // x, y, w, h for drawing purpose
 //    private int x;
 //    private int y;
     private final int w = 70;
     private final int h = 70;
-    // rectaecking
+    private AbstractCharacter source;
+    private int facing;
+    private int speed = 12;
+    // rectangle for collision checking
     private Rectangle rectangle;
-
-    private static BufferedImage img;
 
     public Firebow() {
         if (img == null) {

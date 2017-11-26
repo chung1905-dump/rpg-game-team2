@@ -1,14 +1,14 @@
 package Manager;
 
-import Map.*;
+import Map.AbstractMap;
+import Map.TestMap;
 
 public class TileMapManager {
+    private static final int NUM_MAPS = 1;
+    private static final int TESTMAP = 0;
     private static AbstractMap[] maps;
     private static int current;
     private static int previous;
-
-    private static final int NUM_MAPS = 1;
-    private static final int TESTMAP = 0;
 
 //    private TileMapManager() {
 //        maps = new AbstractMap[NUM_MAPS];
@@ -32,6 +32,7 @@ public class TileMapManager {
             maps[i] = new TestMap();
         }
     }
+
 
     public static void update() {
         maps[current].update();

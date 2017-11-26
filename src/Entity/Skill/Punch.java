@@ -8,18 +8,16 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Punch extends AbstractSkill {
-    private AbstractCharacter source;
-
-    private int during;
+    private static BufferedImage img;
     // x, y, w, h for drawing purpose
 //    private int x;
 //    private int y;
     private final int w = 30;
     private final int h = 30;
+    private AbstractCharacter source;
+    private int during;
     // rectangle for collision checking
     private Rectangle rectangle;
-
-    private static BufferedImage img;
 
     public Punch() {
         if (img == null) {

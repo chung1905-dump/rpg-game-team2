@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class Water extends AbstractTile implements BlockTile {
     private static BufferedImage img;
 
-    public Water () {
+    public Water() {
         if (img == null) {
             img = Tool.Image.loadImage("/images/map/tiles/water.png");
         }

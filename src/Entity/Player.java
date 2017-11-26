@@ -4,8 +4,8 @@ import Entity.Skill.AbstractSkill;
 import Entity.Skill.Firebow;
 import Entity.Skill.Punch;
 import Main.GamePanel;
-import Tool.Keys;
 import Map.AbstractMap;
+import Tool.Keys;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,8 +13,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends AbstractCharacter {
-    final private String imgPath = "/entity/character/character.png";
     private static BufferedImage img[][];
+    final private String imgPath = "/entity/character/character.png";
     private AbstractMap map;
     private int moveSpeed = 160;
 

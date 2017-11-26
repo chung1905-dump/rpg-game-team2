@@ -3,13 +3,11 @@ package Entity;
 import java.awt.*;
 
 abstract public class AbstractCharacter {
-    protected int facing;
-
     public static final int UP = 0;
     public static final int DOWN = 1;
     public static final int RIGHT = 2;
     public static final int LEFT = 3;
-
+    protected int facing;
     protected int hp;
 
     protected int width;
