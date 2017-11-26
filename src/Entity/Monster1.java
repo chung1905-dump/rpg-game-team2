@@ -15,7 +15,7 @@ public class Monster1 extends AbstractCharacter {
         height = 64;
         //load img
         if (img == null) {
-            img = Tool.Image.loadImage("/entity/character/monster.png");
+            img = Tool.Image.loadImage("/entity/character/mbat4.png");
         }
     }
 
