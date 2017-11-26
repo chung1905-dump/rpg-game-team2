@@ -6,7 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import  Manager.*;
+import Manager.*;
+import Tool.Keys;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
@@ -24,15 +25,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private Thread thread;
     private boolean running;
     private final int FPS = 60;
-    private final int TARGET_TIME = 1000/FPS;
+    private final int TARGET_TIME = 1000 / FPS;
 
-    public GamePanel(){
+    public GamePanel() {
         super();
-        setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setFocusable(true);
         requestFocus();
     }
-    public void run(){
+
+    public void run() {
 
         init();
 
@@ -41,64 +43,71 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         long wait;
 
         //game loop:vong lap
-        while(running){
+        while (running) {
             start = System.nanoTime();
 
             update();
             draw();
             drawToScreen();
 
-            elapsed = (System.nanoTime()-start)/1000000;
+            elapsed = (System.nanoTime() - start) / 1000000;
 
             wait = TARGET_TIME - elapsed;
-            if(wait<0) wait=TARGET_TIME;
+            if (wait < 0) wait = TARGET_TIME;
 
-            try{
+            try {
                 Thread.sleep(wait);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
     //initializes fields : khoi tao cac truong
-    private void init(){
+    private void init() {
         running = true;
-        image = new BufferedImage(WIDTH,HEIGHT,1);// tạo 1 ảnh đục
+        image = new BufferedImage(WIDTH, HEIGHT, 1);// tạo 1 ảnh đục
         g = (Graphics2D) image.getGraphics();
         gsm = new GameStateManager();
     }
+
     //update game
-    private void update(){
+    private void update() {
         gsm.update();
 //        Keys.update();
     }
 
     //draws game
-    private void draw(){
+    private void draw() {
         gsm.draw(g);
     }
+
     //copy buff to screen
-    private void drawToScreen(){
+    private void drawToScreen() {
         Graphics g2 = getGraphics();
-        g2.drawImage(image,0,0,WIDTH,HEIGHT,null);
+        g2.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         g2.dispose();//ngat tien trinh
     }
+
     //ready to display
-    public void addNotify(){
+    public void addNotify() {
         super.addNotify();
-        if(thread == null){
+        if (thread == null) {
             addKeyListener(this);
             thread = new Thread(this);
             thread.start();
         }
     }
+
     //key event
-    public void keyTyped(KeyEvent key){
+    public void keyTyped(KeyEvent key) {
 
     }
-    public  void keyPressed(KeyEvent key){
+
+    public void keyPressed(KeyEvent key) {
         Keys.keySet(key.getKeyCode(), true);
     }
+
     public void keyReleased(KeyEvent key) {
 
         Keys.keySet(key.getKeyCode(), false);

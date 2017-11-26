@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import Main.GamePanel;
 import Manager.GameStateManager;
-import Manager.Keys;
+import Tool.Keys;
 
 public class IntroState extends AbstractGameState {
      private BufferedImage logo;

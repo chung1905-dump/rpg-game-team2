@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import Manager.GameStateManager;
 import Manager.Content;
-import Manager.Keys;
+import Tool.Keys;
 
 public class MenuState extends AbstractGameState{
     private BufferedImage bg;
