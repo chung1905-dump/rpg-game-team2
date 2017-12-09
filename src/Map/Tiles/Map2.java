@@ -33,6 +33,11 @@ public class Map2 extends AbstractMap {
     }
 
     @Override
+    public int[][] getRawMapData() {
+        return rawMapData;
+    }
+
+    @Override
     public int[] getDefaultPosition() {
         return new int[0];
     }

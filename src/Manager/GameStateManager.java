@@ -16,9 +16,18 @@ public class GameStateManager {
     private int currentState;
     private int previousState;
 
-    public GameStateManager() {
+    private static GameStateManager instance;
+
+    private GameStateManager() {
         gameStates = new AbstractGameState[NUM_STATES];
         setState(INTRO);
+    }
+
+    public static GameStateManager getInstance() {
+        if (instance == null) {
+            instance = new GameStateManager();
+        }
+        return instance;
     }
 
     public void setState(int i) {

@@ -4,8 +4,8 @@ import Entity.Skill.AbstractSkill;
 import Entity.Skill.Firebow;
 import Entity.Skill.Punch;
 import Main.GamePanel;
+import Manager.GameStateManager;
 import Manager.TileMapManager;
-import Map.AbstractMap;
 import Tool.Keys;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ public class Player extends AbstractCharacter {
     private static BufferedImage img[][];
 
     final private String imgPath = "/entity/character/character.png";
-//    private AbstractMap map;
+    //    private AbstractMap map;
     private int moveSpeed = 160;
 
     private int moveStep = 0;
@@ -34,7 +34,6 @@ public class Player extends AbstractCharacter {
     private final double SCALE = 0.8;
 
     private Player() {
-
         hp = 10;
         facing = AbstractCharacter.DOWN;
         map = TileMapManager.getCurrent();
@@ -91,6 +90,9 @@ public class Player extends AbstractCharacter {
     }
 
     public void update() {
+        if (isDie()) {
+            GameStateManager.getInstance().setState(GameStateManager.MENU);
+        }
         handleInput();
         for (int i = 0; i < currentActiveSkills.size(); i++) {
             AbstractSkill e = currentActiveSkills.get(i);
@@ -152,7 +154,7 @@ public class Player extends AbstractCharacter {
 
     @Override
     public boolean isDie() {
-        return false;
+        return hp <= 0;
     }
 
     @Override

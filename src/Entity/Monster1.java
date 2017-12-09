@@ -11,6 +11,8 @@ public class Monster1 extends AbstractCharacter {
     //    private AbstractMap map;
     // to check if player in sight
     private Rectangle sightRectangle;
+    private int speed = 4;
+    private int w, h;
 
     public Monster1(int x, int y, int w, int h, AbstractMap map) {
         this.map = map;
@@ -18,9 +20,11 @@ public class Monster1 extends AbstractCharacter {
         //x,y,w,h
         this.x = x;
         this.y = y;
-        this.rectangle = new Rectangle(x * w, y * h, w, h);
+        this.w = w;
+        this.h = h;
+        this.rectangle = new Rectangle(x * w, y * h, w * 7 / 10, h * 7 / 10);
         //
-        sightRectangle = new Rectangle(x - 1, y - 1, w * 3, h * 3);
+        sightRectangle = new Rectangle(rectangle.x - 3 * w, rectangle.y - 3 * h, w * 7, h * 7);
         //load img
         if (img == null) {
             img = Tool.Image.loadImage("/entity/character/mbat4.png");
@@ -30,16 +34,32 @@ public class Monster1 extends AbstractCharacter {
     @Override
     public void update() {
         Rectangle playerRectangle = Player.getInstance().getRectangle();
-        if (sightRectangle.intersects(playerRectangle)) {
-            int[][] mapData = TileMapManager.getCurrent().getRawMapData();
-            int i = 0;
+        if (rectangle.intersects(playerRectangle)) {
+            Player.getInstance().setHp(0);
+        } else if (sightRectangle.intersects(playerRectangle)) {
+//            int[][] mapData = TileMapManager.getCurrent().getRawMapData();
+            double[] move = findMove(rectangle.getX(), rectangle.getY(), playerRectangle.getX(), playerRectangle.getY());
+            Rectangle dest = (Rectangle) rectangle.clone();
+            dest.x += Math.ceil(move[0]);
+            if (!TileMapManager.getCurrent().isBlock(dest)) {
+                rectangle = dest;
+            }
+            dest = (Rectangle) rectangle.clone();
+            dest.y += Math.ceil(move[1]);
+            if (!TileMapManager.getCurrent().isBlock(dest)) {
+                rectangle = dest;
+            }
         }
+        sightRectangle = new Rectangle(rectangle.x - 3 * w, rectangle.y - 3 * h, w * 7, h * 7);
     }
 
-    private int[] findMove(int sx, int sy, int tx, int ty, int[][] map) {
-        int[] path = new int[0];
-
-        return path;
+    private double[] findMove(double sx, double sy, double tx, double ty) {
+        double x = tx - sx;
+        double y = ty - sy;
+        double distance = Math.sqrt(x * x + y * y);
+        x = x / distance * speed;
+        y = y / distance * speed;
+        return new double[]{x, y};
     }
 
     @Override

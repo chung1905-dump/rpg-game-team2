@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private void init() {
         i = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) i.getGraphics();
-        gsm = new GameStateManager();
+        gsm = GameStateManager.getInstance();
     }
 
     //update game
@@ -92,7 +92,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             thread.start();
         }
     }
-
 
 
     //key event
