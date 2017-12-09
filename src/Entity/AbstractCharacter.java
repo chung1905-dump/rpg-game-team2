@@ -10,26 +10,29 @@ abstract public class AbstractCharacter {
     protected int facing;
     protected int hp;
 
-    protected int width;
-    protected int height;
+    protected Rectangle rectangle;
 
-    protected int currentX;
-    protected int currentY;
+    protected int x;
+    protected int y;
 
     public int getWidth() {
-        return width;
+        return (int) rectangle.getWidth();
     }
 
     public int getHeight() {
-        return height;
+        return (int) rectangle.getHeight();
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     public int getX() {
-        return currentX;
+        return getRectangle().x;
     }
 
     public int getY() {
-        return currentY;
+        return getRectangle().y;
     }
 
     public int getFacing() {
