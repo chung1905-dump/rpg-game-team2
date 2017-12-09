@@ -30,9 +30,11 @@ public class Player extends AbstractCharacter {
     private int PUNCH = 0;
     private int FIRE_BOW = 1;
 
+
     private final double SCALE = 0.8;
 
     private Player() {
+
         hp = 10;
         facing = AbstractCharacter.DOWN;
         map = TileMapManager.getCurrent();

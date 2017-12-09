@@ -10,7 +10,7 @@ public class Water extends AbstractTile implements BlockTile {
 
     public Water() {
         if (img == null) {
-            img = Tool.Image.loadImage("/images/map/tiles/water.png");
+            img = Tool.Image.loadImage("/images/map/tiles/water1.png");
         }
     }
 

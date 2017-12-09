@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 public class Firebow extends AbstractSkill {
     private static BufferedImage img;
+    private static BufferedImage img2;
+    private static BufferedImage img3;
+    private static BufferedImage img4;
+
     // x, y, w, h for drawing purpose
 //    private int x;
 //    private int y;
@@ -24,6 +28,9 @@ public class Firebow extends AbstractSkill {
     public Firebow() {
         if (img == null) {
             img = Tool.Image.loadImage("/entity/skills/firebow.png");
+            img2 = Tool.Image.loadImage("/entity/skills/firebow2.png");
+            img3 = Tool.Image.loadImage("/entity/skills/firebow3.png");
+            img4 = Tool.Image.loadImage("/entity/skills/firebow4.png");
         }
     }
 
@@ -88,7 +95,23 @@ public class Firebow extends AbstractSkill {
     public void draw(Graphics2D g) {
         int x = (int) rectangle.getX();
         int y = (int) rectangle.getY();
-        g.drawImage(img, x, y, w, h, null);
+        switch (facing)
+        {
+            case AbstractCharacter.UP:
+                g.drawImage(img4, x, y, w, h, null);
+                break;
+            case AbstractCharacter.DOWN:
+                g.drawImage(img3, x, y, w, h, null);
+                break;
+            case AbstractCharacter.LEFT:
+                g.drawImage(img2, x, y, w, h, null);
+                break;
+            case AbstractCharacter.RIGHT:
+                g.drawImage(img, x, y, w, h, null);
+                break;
+        }
+
+
     }
 
     @Override
