@@ -4,6 +4,7 @@ import Entity.Skill.AbstractSkill;
 import Entity.Skill.Firebow;
 import Entity.Skill.Punch;
 import Main.GamePanel;
+import Manager.TileMapManager;
 import Map.AbstractMap;
 import Tool.Keys;
 
@@ -13,7 +14,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends AbstractCharacter {
+    private static Player instance;
     private static BufferedImage img[][];
+
     final private String imgPath = "/entity/character/character.png";
     private AbstractMap map;
     private int moveSpeed = 160;
@@ -27,17 +30,30 @@ public class Player extends AbstractCharacter {
     private int PUNCH = 0;
     private int FIRE_BOW = 1;
 
-    public Player(AbstractMap m) {
+    private final double SCALE = 0.8;
+
+    private Player() {
         hp = 10;
         facing = AbstractCharacter.DOWN;
-        map = m;
+        map = TileMapManager.getCurrent();
         // scale character to 4/5 a block tile
-        width = map.getTileWidth() * 4 / 5;
-        height = map.getTileHeight() * 4 / 5;
-        currentX = map.getDefaultPosition()[0] * map.getTileWidth();// * 5 / 4;
-        currentY = map.getDefaultPosition()[1] * map.getTileHeight();//* 5 / 4;
+        x = map.getDefaultPosition()[0];
+        y = map.getDefaultPosition()[1];
+        int xcoord = x * map.getTileWidth();
+        int ycoord = y * map.getTileHeight();
+        double width = map.getTileWidth() * SCALE;
+        double height = map.getTileHeight() * SCALE;
+
+        rectangle = new Rectangle(xcoord, ycoord, (int) width, (int) height);
         loadSkill();
         loadSprites();
+    }
+
+    public static Player getInstance() {
+        if (instance == null) {
+            instance = new Player();
+        }
+        return instance;
     }
 
     private void loadSkill() {
@@ -63,22 +79,6 @@ public class Player extends AbstractCharacter {
         img[RIGHT][0] = Tool.Image.loadImage("/entity/character/char20.png");
         img[RIGHT][1] = Tool.Image.loadImage("/entity/character/char21.png");
         img[RIGHT][2] = Tool.Image.loadImage("/entity/character/char22.png");
-
-//        img[UP][0] = Tool.Image.loadImage(imgPath, 130, 33, 16, 16);
-//        img[UP][1] = Tool.Image.loadImage(imgPath, 146, 33, 16, 16);
-//        img[UP][2] = Tool.Image.loadImage(imgPath, 162, 33, 16, 16);
-//
-//        img[DOWN][0] = Tool.Image.loadImage(imgPath, 130, 0, 14, 16);
-//        img[DOWN][1] = Tool.Image.loadImage(imgPath, 146, 0, 14, 16);
-//        img[DOWN][2] = Tool.Image.loadImage(imgPath, 162, 0, 14, 16);
-//
-//        img[LEFT][0] = Tool.Image.loadImage(imgPath, 130, 17, 16, 16);
-//        img[LEFT][1] = Tool.Image.loadImage(imgPath, 146, 17, 16, 16);
-//        img[LEFT][2] = Tool.Image.loadImage(imgPath, 162, 17, 16, 16);
-//
-//        img[RIGHT][0] = Tool.Image.loadImage(imgPath, 130, 17, 16, 16);
-//        img[RIGHT][1] = Tool.Image.loadImage(imgPath, 146, 17, 16, 16);
-//        img[RIGHT][2] = Tool.Image.loadImage(imgPath, 162, 17, 16, 16);
     }
 
     private BufferedImage getImg() {
@@ -128,32 +128,23 @@ public class Player extends AbstractCharacter {
         isMoving = true;
         facing = i;
         moveStep++;
-        int dest;
+        Rectangle dest = (Rectangle) rectangle.clone();
         switch (i) {
             case UP:
-                dest = currentY - speed;
-                if (!this.map.isBlock(new Rectangle(currentX, dest, width, height))) {
-                    currentY = dest;
-                }
+                dest.y -= speed;
                 break;
             case DOWN:
-                dest = currentY + speed;
-                if (!this.map.isBlock(new Rectangle(currentX, dest, width, height))) {
-                    currentY = dest;
-                }
+                dest.y += speed;
                 break;
             case LEFT:
-                dest = currentX - speed;
-                if (!this.map.isBlock(new Rectangle(dest, currentY, width, height))) {
-                    currentX = dest;
-                }
+                dest.x -= speed;
                 break;
             case RIGHT:
-                dest = currentX + speed;
-                if (!this.map.isBlock(new Rectangle(dest, currentY, width, height))) {
-                    currentX = dest;
-                }
+                dest.x += speed;
                 break;
+        }
+        if (!this.map.isBlock(dest)) {
+            rectangle = dest;
         }
     }
 
@@ -168,7 +159,7 @@ public class Player extends AbstractCharacter {
 
     // need fix
     public void draw(Graphics2D g) {
-        g.drawImage(getImg(), currentX, currentY, width, height, null);
+        g.drawImage(getImg(), rectangle.x, rectangle.y, rectangle.width, rectangle.height, null);
         // warning 2 same loop
         for (AbstractSkill e : currentActiveSkills) {
             e.draw(g);

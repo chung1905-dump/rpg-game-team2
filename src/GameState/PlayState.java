@@ -13,7 +13,7 @@ public class PlayState extends AbstractGameState {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         TileMapManager.init();
-        player = new Player(TileMapManager.getCurrent());
+        player = Player.getInstance();
     }
 
     @Override
