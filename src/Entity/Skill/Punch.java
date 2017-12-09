@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class Punch extends AbstractSkill {
     private static BufferedImage img;
+    private static BufferedImage img2;
+    private static BufferedImage img3;
+    private static BufferedImage img4;
     // x, y, w, h for drawing purpose
 //    private int x;
 //    private int y;
@@ -16,12 +19,16 @@ public class Punch extends AbstractSkill {
     private final int h = 30;
     private AbstractCharacter source;
     private int during;
+    private int facing;
     // rectangle for collision checking
     private Rectangle rectangle;
 
     public Punch() {
         if (img == null) {
-            img = Tool.Image.loadImage("/entity/skills/punch.png");
+            img = Tool.Image.loadImage("/entity/skills/punch2.png");
+            img2 = Tool.Image.loadImage("/entity/skills/punch3.png");
+            img3 = Tool.Image.loadImage("/entity/skills/punch4.png");
+            img4 = Tool.Image.loadImage("/entity/skills/pixil-frame-0.png");
         }
     }
 
@@ -30,7 +37,7 @@ public class Punch extends AbstractSkill {
         int x = 0, y = 0;
         Punch ret = new Punch();
         ret.source = character;
-        ret.during = 0;
+        ret.facing = character.getFacing();
         switch (character.getFacing()) {
             case AbstractCharacter.UP:
                 x = character.getX() + character.getWidth() / 2 - w / 2;
@@ -73,7 +80,21 @@ public class Punch extends AbstractSkill {
     public void draw(Graphics2D g) {
         int x = (int) rectangle.getX();
         int y = (int) rectangle.getY();
-        g.drawImage(img, x, y, w, h, null);
+        switch (facing)
+        {
+            case AbstractCharacter.UP:
+                g.drawImage(img, x, y, w, h, null);
+                break;
+            case AbstractCharacter.DOWN:
+                g.drawImage(img2, x, y, w, h, null);
+                break;
+            case AbstractCharacter.LEFT:
+                g.drawImage(img3, x, y, w, h, null);
+                break;
+            case AbstractCharacter.RIGHT:
+                g.drawImage(img4, x, y, w, h, null);
+                break;
+        }
     }
 
     @Override

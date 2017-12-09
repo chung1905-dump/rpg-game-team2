@@ -8,8 +8,9 @@ public class Content {
     // public static BufferedImage[][] TITLE= load();
     public static BufferedImage[][] MENUBG = load("/images/HUD/poster.png", 800, 800);
     public static BufferedImage[][] DIAMOND = load("/images/HUD/fire1.gif", 80, 80);
-    public static BufferedImage[][] PLAYER = load("/images/sprites/playersprites.gif", 16, 16);
     public static BufferedImage[][] font = load("/images/HUD/font.gif", 8, 8);
+    public static BufferedImage[][] BAR=load("/images/HUD/bar.gif",128,16);
+
 
     public static BufferedImage[][] load(String s, int w, int h) {
         BufferedImage[][] ret;

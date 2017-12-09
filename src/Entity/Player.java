@@ -27,6 +27,7 @@ public class Player extends AbstractCharacter {
     private int PUNCH = 0;
     private int FIRE_BOW = 1;
 
+
     public Player(AbstractMap m) {
         hp = 10;
         facing = AbstractCharacter.DOWN;

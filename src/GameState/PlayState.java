@@ -3,12 +3,14 @@ package GameState;
 import Entity.Player;
 import Manager.GameStateManager;
 import Manager.TileMapManager;
+import HUD.HUD;
 
 import java.awt.*;
 
 public class PlayState extends AbstractGameState {
     //    private static TileMapManager mapManager;
     private Player player;
+    private HUD hud;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -18,7 +20,7 @@ public class PlayState extends AbstractGameState {
 
     @Override
     public void init() {
-
+        hud = new HUD(player);
     }
 
     public void update() {
@@ -29,6 +31,7 @@ public class PlayState extends AbstractGameState {
     public void draw(Graphics2D g) {
         TileMapManager.getCurrent().draw(g);
         player.draw(g);
+        hud.draw(g);
     }
 
     @Override
