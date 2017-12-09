@@ -40,7 +40,7 @@ public class HUD {
     public void draw(Graphics2D g) {
 
         // draw hud
-        g.drawImage(bar, 0, yOffset, null);
+        g.drawImage(bar, 0, yOffset - 32, null);
 
 
     }
