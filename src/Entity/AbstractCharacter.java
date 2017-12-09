@@ -1,5 +1,7 @@
 package Entity;
 
+import Map.AbstractMap;
+
 import java.awt.*;
 
 abstract public class AbstractCharacter {
@@ -9,6 +11,7 @@ abstract public class AbstractCharacter {
     public static final int LEFT = 3;
     protected int facing;
     protected int hp;
+    protected AbstractMap map;
 
     protected Rectangle rectangle;
 
@@ -33,6 +36,10 @@ abstract public class AbstractCharacter {
 
     public int getY() {
         return getRectangle().y;
+    }
+
+    public int[] getGridXY() {
+        return new int[]{(int) rectangle.getX() / map.getTileWidth(), (int) rectangle.getY() / map.getTileHeight()};
     }
 
     public int getFacing() {

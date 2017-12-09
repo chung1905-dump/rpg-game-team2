@@ -39,19 +39,7 @@ public class TestMap extends AbstractMap {
         tileWidth = GamePanel.WIDTH / numCols;
         tileHeight = GamePanel.HEIGHT / numRows;
         //define map content
-        rawMapData = new int[][]{
-                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 0, 2, 0, 0, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 0, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 1, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 0, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-        };
-
+        rawMapData = getRawMapData();
         //save tiles blocking player's movement
         blockRectangles = new ArrayList<>();
         for (int x = 0; x < numCols; x++) {
@@ -65,6 +53,22 @@ public class TestMap extends AbstractMap {
         }
 
         initMonsters();
+    }
+
+    @Override
+    public int[][] getRawMapData() {
+        return new int[][]{
+                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                {2, 0, 2, 0, 0, 0, 0, 0, 2, 2},
+                {2, 0, 0, 1, 0, 0, 0, 0, 2, 2},
+                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
+                {2, 0, 0, 1, 1, 0, 1, 0, 2, 2},
+                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
+                {2, 0, 0, 1, 1, 0, 0, 0, 0, 2},
+                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+        };
     }
 
     private void initMonsters() {

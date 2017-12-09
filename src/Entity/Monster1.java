@@ -1,5 +1,6 @@
 package Entity;
 
+import Manager.TileMapManager;
 import Map.AbstractMap;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class Monster1 extends AbstractCharacter {
     private static BufferedImage img;
-    private AbstractMap map;
+    //    private AbstractMap map;
     // to check if player in sight
     private Rectangle sightRectangle;
 
@@ -29,9 +30,21 @@ public class Monster1 extends AbstractCharacter {
     @Override
     public void update() {
         Rectangle playerRectangle = Player.getInstance().getRectangle();
-//        if (sightRectangle.intersects(playerRectangle) {
-//
-//        }
+        if (sightRectangle.intersects(playerRectangle)) {
+            int[][] mapData = TileMapManager.getCurrent().getRawMapData();
+            int i = 0;
+        }
+    }
+
+    private int[] findMove(int sx, int sy, int tx, int ty, int[][] map) {
+        int[] path = new int[0];
+
+        return path;
+    }
+
+    @Override
+    public int[] getGridXY() {
+        return new int[]{(int) rectangle.getX() / map.getTileWidth(), (int) rectangle.getY() / map.getTileHeight()};
     }
 
     @Override

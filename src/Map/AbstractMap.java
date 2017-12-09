@@ -43,4 +43,5 @@ abstract public class AbstractMap {
         return false;
     }
 
+    abstract public int[][] getRawMapData();
 }

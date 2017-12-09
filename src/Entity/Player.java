@@ -18,7 +18,7 @@ public class Player extends AbstractCharacter {
     private static BufferedImage img[][];
 
     final private String imgPath = "/entity/character/character.png";
-    private AbstractMap map;
+//    private AbstractMap map;
     private int moveSpeed = 160;
 
     private int moveStep = 0;
@@ -151,6 +151,11 @@ public class Player extends AbstractCharacter {
     @Override
     public boolean isDie() {
         return false;
+    }
+
+    @Override
+    public int[] getGridXY() {
+        return new int[]{(int) rectangle.getX() / map.getTileWidth(), (int) rectangle.getY() / map.getTileHeight()};
     }
 
     public int getMoveSpeed() {
