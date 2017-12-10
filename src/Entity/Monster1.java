@@ -27,7 +27,7 @@ public class Monster1 extends AbstractCharacter {
         sightRectangle = new Rectangle(rectangle.x - 3 * w, rectangle.y - 3 * h, w * 7, h * 7);
         //load img
         if (img == null) {
-            img = Tool.Image.loadImage("/entity/character/mbat4.png");
+            img = Tool.Image.loadImage("/entity/character/mbat1.png");
         }
     }
 

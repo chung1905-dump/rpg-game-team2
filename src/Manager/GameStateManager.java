@@ -1,9 +1,6 @@
 package Manager;
 
-import GameState.AbstractGameState;
-import GameState.IntroState;
-import GameState.MenuState;
-import GameState.PlayState;
+import GameState.*;
 
 import java.awt.*;
 
@@ -11,7 +8,8 @@ public class GameStateManager {
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int PLAY = 2;
-    private static final int NUM_STATES = 3;
+    private static final int NUM_STATES =4 ;
+    public static final int OVER = 3;
     private AbstractGameState[] gameStates;
     private int currentState;
     private int previousState;
@@ -42,6 +40,9 @@ public class GameStateManager {
             gameStates[i].init();
         } else if (i == PLAY) {
             gameStates[i] = new PlayState(this);
+            gameStates[i].init();
+        }else if (i == OVER) {
+            gameStates[i] = new GameOverState(this);
             gameStates[i].init();
         }
     }
