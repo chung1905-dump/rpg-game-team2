@@ -2,10 +2,12 @@ package Manager;
 
 import Map.AbstractMap;
 import Map.TestMap;
+import Map.Map2;
 
 public class TileMapManager {
-    private static final int NUM_MAPS = 1;
+    private static final int NUM_MAPS = 2;
     private static final int TESTMAP = 0;
+    private static final int MAP2 = 1;
     private static AbstractMap[] maps;
     private static int current;
     private static int previous;
@@ -17,7 +19,7 @@ public class TileMapManager {
 
     public static void init() {
         maps = new AbstractMap[NUM_MAPS];
-        set(TESTMAP);
+        set(MAP2);
     }
 
     public static AbstractMap getCurrent() {
@@ -28,8 +30,8 @@ public class TileMapManager {
         previous = current;
         unload(previous);
         current = i;
-        if (i == TESTMAP) {
-            maps[i] = new TestMap();
+        if (i == MAP2) {
+            maps[i] = new Map2();
         }
     }
 
