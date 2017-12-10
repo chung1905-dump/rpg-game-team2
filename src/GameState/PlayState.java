@@ -1,9 +1,9 @@
 package GameState;
 
 import Entity.Player;
+import HUD.HUD;
 import Manager.GameStateManager;
 import Manager.TileMapManager;
-import HUD.HUD;
 
 import java.awt.*;
 

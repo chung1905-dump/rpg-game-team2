@@ -1,10 +1,8 @@
 package Map;
 
 import Entity.AbstractCharacter;
-import Entity.Monster1;
 import Interface.BlockTile;
 import Main.GamePanel;
-import Map.AbstractMap;
 import Map.Tiles.AbstractTile;
 import Map.Tiles.Grass;
 import Map.Tiles.Tree;
@@ -20,11 +18,13 @@ public class Map2 extends AbstractMap {
 
     //background color
     private final Color backgroundColor = new Color(066, 226, 007);
-    private final int NUM_TILES = 3;
+    private final int NUM_TILES = 4;
     private final int GRASS_TILE = 0;
-    private final int WATER_TILE = 0;
+    private final int WATER_TILE = 1;
     private final int TREE_TILE = 2;
-    //contains array of integer 0, 2, 3
+    private final int PORTAL_TILE = 3;
+
+    //contains array of integer 0, 1, 2, 3
     private int rawMapData[][];
     //tiles are used in map
     private AbstractTile tiles[];
@@ -58,8 +58,6 @@ public class Map2 extends AbstractMap {
 
     private void initMonsters() {
         monsters = new ArrayList<>();
-//        monsters.add(new Monster1(7, 3, tileWidth, tileHeight, this));
-//        monsters.add(new Monster1(9,6,tileWidth,tileHeight,this));
     }
 
     @Override

@@ -12,7 +12,9 @@ public final class Keys {
     }
 
     public static void keySet(int i, boolean b) {
-        keyState[i] = b;
+        if (i < NUM_KEYS) {
+            keyState[i] = b;
+        }
     }
 
     public static boolean isDown(int i) {
