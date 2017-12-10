@@ -1,6 +1,7 @@
 package Map;
 
 import Entity.AbstractCharacter;
+import Entity.Monster1;
 import Interface.BlockTile;
 import Interface.PortalTile;
 import Main.GamePanel;
@@ -16,7 +17,7 @@ public class Map2 extends AbstractMap {
     private final int numRows = 10;
 
     //background color
-    private final Color backgroundColor = new Color(066, 226, 007);
+    private final Color backgroundColor = new Color(180, 226, 107);
     private final int NUM_TILES = 4;
     private final int GRASS_TILE = 0;
     private final int WATER_TILE = 1;
@@ -61,8 +62,29 @@ public class Map2 extends AbstractMap {
         initMonsters();
     }
 
+    @Override
+    public int[][] getRawMapData() {
+        return new int[][]{
+                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                {3, 0, 0, 0, 2, 0, 0, 0, 0, 2},
+                {2, 1, 1, 0, 2, 0, 0, 2, 0, 2},
+                {2, 0, 0, 0, 2, 0, 0, 2, 0, 2},
+                {2, 0, 0, 0, 2, 0, 0, 2, 0, 2},
+                {2, 0, 1, 0, 0, 0, 1, 1, 0, 2},
+                {2, 0, 1, 0, 1, 0, 1, 0, 0, 2},
+                {2, 0, 1, 0, 1, 0, 1, 0, 0, 2},
+                {2, 0, 0, 0, 0, 0, 1, 0, 0, 2},
+                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+        };
+    }
+
     private void initMonsters() {
         monsters = new ArrayList<>();
+        monsters.add(new Monster1(8, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(7, 1, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(3, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(4, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(3, 2, tileWidth, tileHeight, this));
     }
 
     @Override
@@ -92,23 +114,6 @@ public class Map2 extends AbstractMap {
     }
 
     @Override
-    public int[][] getRawMapData() {
-        return new int[][]{
-                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                {2, 0, 0, 0, 2, 0, 0, 0, 0, 2},
-                {2, 1, 1, 0, 2, 0, 0, 2, 0, 2},
-                {2, 0, 0, 0, 2, 0, 0, 2, 0, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 2, 1, 0, 0, 0, 0, 0, 0, 2},
-                {2, 2, 0, 0, 1, 0, 1, 0, 0, 2},
-                {2, 2, 0, 0, 0, 0, 1, 0, 0, 3},
-                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-        };
-
-    }
-
-    @Override
     public AbstractMap next() {
         GameStateManager.getInstance().setState(GameStateManager.WIN);
         return null;
@@ -116,7 +121,7 @@ public class Map2 extends AbstractMap {
 
     @Override
     public int[] getDefaultPosition() {
-        return new int[]{2, 1};
+        return new int[]{8, 8};
     }
 
     @Override

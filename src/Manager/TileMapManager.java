@@ -20,8 +20,7 @@ public class TileMapManager {
 
     public static void init() {
         maps = new AbstractMap[NUM_MAPS];
-        set(TESTMAP
-        );
+        set(TESTMAP);
     }
 
     public static AbstractMap getCurrent() {

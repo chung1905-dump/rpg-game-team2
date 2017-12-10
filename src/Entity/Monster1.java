@@ -24,7 +24,7 @@ public class Monster1 extends AbstractCharacter {
         this.h = h;
         this.rectangle = new Rectangle(x * w, y * h, w * 7 / 10, h * 7 / 10);
         //
-        sightRectangle = new Rectangle(rectangle.x - 3 * w, rectangle.y - 3 * h, w * 7, h * 7);
+        sightRectangle = getSightRectangle(rectangle);
         //load img
         if (img == null) {
             img = Tool.Image.loadImage("/entity/character/mbat1.png");
@@ -50,7 +50,12 @@ public class Monster1 extends AbstractCharacter {
                 rectangle = dest;
             }
         }
-        sightRectangle = new Rectangle(rectangle.x - 3 * w, rectangle.y - 3 * h, w * 7, h * 7);
+        sightRectangle = getSightRectangle(rectangle);
+
+    }
+
+    private Rectangle getSightRectangle(Rectangle r) {
+        return new Rectangle(r.x - 1 * w, r.y - 1 * h, w * 3, h * 3);
     }
 
     private double[] findMove(double sx, double sy, double tx, double ty) {

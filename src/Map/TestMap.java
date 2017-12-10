@@ -69,21 +69,26 @@ public class TestMap extends AbstractMap {
 
         return new int[][]{
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                {2, 0, 0, 0, 0, 1, 0, 0, 2, 2},
+                {2, 0, 0, 0, 0, 1, 0, 0, 2, 2},
+                {2, 1, 1, 1, 0, 0, 0, 0, 0, 2},
+                {2, 0, 0, 1, 0, 0, 0, 0, 0, 2},
+                {2, 0, 0, 1, 2, 2, 1, 0, 0, 2},
+                {2, 0, 0, 0, 0, 0, 0, 0, 2, 2},
+                {2, 0, 0, 1, 2, 2, 2, 2, 2, 2},
                 {2, 0, 0, 0, 0, 0, 0, 0, 0, 3},
-                {2, 0, 2, 0, 0, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 0, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 1, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
-                {2, 0, 0, 1, 1, 0, 0, 0, 0, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
         };
     }
 
     private void initMonsters() {
         monsters = new ArrayList<>();
+        monsters.add(new Monster1(4, 3, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(6, 3, tileWidth, tileHeight, this));
         monsters.add(new Monster1(7, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(1, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(2, 5, tileWidth, tileHeight, this));
+        monsters.add(new Monster1(2, 8, tileWidth, tileHeight, this));
     }
 
 

@@ -93,7 +93,7 @@ public class Player extends AbstractCharacter {
     public void update() {
         if (isDie()) {
             instance = null;
-            GameStateManager.getInstance().setState(GameStateManager.MENU);
+            GameStateManager.getInstance().setState(GameStateManager.OVER);
         }
         handleInput();
 
