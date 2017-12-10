@@ -6,6 +6,7 @@ import Entity.Skill.Punch;
 import Main.GamePanel;
 import Manager.GameStateManager;
 import Manager.TileMapManager;
+import Map.AbstractMap;
 import Tool.Keys;
 
 import java.awt.*;
@@ -154,7 +155,16 @@ public class Player extends AbstractCharacter {
             rectangle = dest;
         }
         if (this.map.isPortal(rectangle)) {
-            map.next();
+            AbstractMap nextMap = map.next();
+            map = nextMap;
+            x = nextMap.getDefaultPosition()[0];
+            y = nextMap.getDefaultPosition()[1];
+            int xcoord = x * nextMap.getTileWidth();
+            int ycoord = y * nextMap.getTileHeight();
+            double width = nextMap.getTileWidth() * SCALE;
+            double height = nextMap.getTileHeight() * SCALE;
+
+            rectangle = new Rectangle(xcoord, ycoord, (int) width, (int) height);
         }
     }
 

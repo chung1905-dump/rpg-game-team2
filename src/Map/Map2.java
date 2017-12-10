@@ -3,10 +3,7 @@ package Map;
 import Entity.AbstractCharacter;
 import Interface.BlockTile;
 import Main.GamePanel;
-import Map.Tiles.AbstractTile;
-import Map.Tiles.Grass;
-import Map.Tiles.Tree;
-import Map.Tiles.Water;
+import Map.Tiles.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,6 +33,7 @@ public class Map2 extends AbstractMap {
         tiles[GRASS_TILE] = new Grass();
         tiles[WATER_TILE] = new Water();
         tiles[TREE_TILE] = new Tree();
+        tiles[PORTAL_TILE] = new Portal();
 
         tileWidth = GamePanel.WIDTH / numCols;
         tileHeight = GamePanel.HEIGHT / numRows;
@@ -101,6 +99,11 @@ public class Map2 extends AbstractMap {
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
         };
 
+    }
+
+    @Override
+    public AbstractMap next() {
+        return null;
     }
 
     @Override

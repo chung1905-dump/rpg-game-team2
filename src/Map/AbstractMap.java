@@ -57,7 +57,7 @@ abstract public class AbstractMap {
         return portalRectangle.intersects(r);
     }
 
-    abstract public void next();
+    abstract public AbstractMap next();
 
     abstract public int[][] getRawMapData();
 }

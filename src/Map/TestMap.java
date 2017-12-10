@@ -119,9 +119,9 @@ public class TestMap extends AbstractMap {
     }
 
     @Override
-    public void next() {
-        GameStateManager.getInstance().setState(GameStateManager.MENU);
-//        TileMapManager.set(TileMapManager.MAP2);
+    public AbstractMap next() {
+        TileMapManager.set(TileMapManager.MAP2);
+        return TileMapManager.getCurrent();
     }
 
     public int getTileWidth() {
