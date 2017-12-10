@@ -2,10 +2,13 @@ package Manager;
 
 import Map.AbstractMap;
 import Map.TestMap;
+import Map.Tiles.Map2;
 
 public class TileMapManager {
-    private static final int NUM_MAPS = 1;
-    private static final int TESTMAP = 0;
+    public static final int NUM_MAPS = 2;
+    public static final int TESTMAP = 0;
+    public static final int MAP2 = 1;
+
     private static AbstractMap[] maps;
     private static int current;
     private static int previous;
@@ -30,7 +33,10 @@ public class TileMapManager {
         current = i;
         if (i == TESTMAP) {
             maps[i] = new TestMap();
+        } else if (i == MAP2) {
+            maps[i] = new Map2();
         }
+
     }
 
 

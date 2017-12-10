@@ -33,6 +33,11 @@ public class Map2 extends AbstractMap {
     }
 
     @Override
+    public void next() {
+
+    }
+
+    @Override
     public int[][] getRawMapData() {
         return rawMapData;
     }

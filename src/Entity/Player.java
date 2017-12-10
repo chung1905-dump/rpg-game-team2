@@ -91,9 +91,12 @@ public class Player extends AbstractCharacter {
 
     public void update() {
         if (isDie()) {
+            instance = null;
             GameStateManager.getInstance().setState(GameStateManager.MENU);
         }
         handleInput();
+
+        //update skills
         for (int i = 0; i < currentActiveSkills.size(); i++) {
             AbstractSkill e = currentActiveSkills.get(i);
             e.update();
@@ -150,11 +153,9 @@ public class Player extends AbstractCharacter {
         if (!this.map.isBlock(dest)) {
             rectangle = dest;
         }
-    }
-
-    @Override
-    public boolean isDie() {
-        return hp <= 0;
+        if (this.map.isPortal(rectangle)) {
+            map.next();
+        }
     }
 
     @Override
