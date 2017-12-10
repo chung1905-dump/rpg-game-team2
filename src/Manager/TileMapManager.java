@@ -5,9 +5,10 @@ import Map.Map2;
 import Map.TestMap;
 
 public class TileMapManager {
-    private static final int NUM_MAPS = 2;
-    private static final int TESTMAP = 0;
-    private static final int MAP2 = 1;
+    public static final int NUM_MAPS = 2;
+    public static final int TESTMAP = 0;
+    public static final int MAP2 = 1;
+
     private static AbstractMap[] maps;
     private static int current;
     private static int previous;
@@ -36,6 +37,7 @@ public class TileMapManager {
         } else if (i == MAP2) {
             maps[i] = new Map2();
         }
+
     }
 
 

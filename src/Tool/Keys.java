@@ -24,6 +24,4 @@ public final class Keys {
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
     }
-
-
 }

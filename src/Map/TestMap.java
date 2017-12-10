@@ -3,11 +3,11 @@ package Map;
 import Entity.AbstractCharacter;
 import Entity.Monster1;
 import Interface.BlockTile;
+import Interface.PortalTile;
 import Main.GamePanel;
-import Map.Tiles.AbstractTile;
-import Map.Tiles.Grass;
-import Map.Tiles.Tree;
-import Map.Tiles.Water;
+import Manager.GameStateManager;
+import Manager.TileMapManager;
+import Map.Tiles.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,11 +19,12 @@ public class TestMap extends AbstractMap {
 
     //background color
     private final Color backgroundColor = new Color(166, 226, 107);
-    private final int NUM_TILES = 3;
+    private final int NUM_TILES = 4;
     private final int GRASS_TILE = 0;
     private final int WATER_TILE = 1;
     private final int TREE_TILE = 2;
-    //contains array of integer 0, 2, 3
+    private final int PORTAL_TILE = 3;
+    //contains array of integer 0, 1, 2, 3
     private int rawMapData[][];
     //tiles are used in map
     private AbstractTile tiles[];
@@ -35,6 +36,7 @@ public class TestMap extends AbstractMap {
         tiles[GRASS_TILE] = new Grass();
         tiles[WATER_TILE] = new Water();
         tiles[TREE_TILE] = new Tree();
+        tiles[PORTAL_TILE] = new Portal();
 
         tileWidth = GamePanel.WIDTH / numCols;
         tileHeight = GamePanel.HEIGHT / numRows;
@@ -49,6 +51,11 @@ public class TestMap extends AbstractMap {
                             new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
                     );
                 }
+                if (tiles[rawMapData[y][x]] instanceof PortalTile) {
+                    setPortalRectangle(
+                            new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
+                    );
+                }
             }
         }
 
@@ -57,9 +64,14 @@ public class TestMap extends AbstractMap {
 
     @Override
     public int[][] getRawMapData() {
+//        private final int GRASS_TILE = 0;
+//        private final int WATER_TILE = 1;
+//        private final int TREE_TILE = 2;
+//        private final int PORTAL_TILE = 3;
+
         return new int[][]{
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                {2, 0, 0, 0, 0, 0, 0, 0, 0, 3},
                 {2, 0, 2, 0, 0, 0, 0, 0, 2, 2},
                 {2, 0, 0, 1, 0, 0, 0, 0, 2, 2},
                 {2, 0, 0, 1, 1, 0, 0, 0, 2, 2},
@@ -104,6 +116,12 @@ public class TestMap extends AbstractMap {
         for (AbstractCharacter m : monsters) {
             m.draw(g);
         }
+    }
+
+    @Override
+    public void next() {
+        GameStateManager.getInstance().setState(GameStateManager.MENU);
+//        TileMapManager.set(TileMapManager.MAP2);
     }
 
     public int getTileWidth() {

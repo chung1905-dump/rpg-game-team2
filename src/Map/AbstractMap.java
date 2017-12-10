@@ -9,6 +9,9 @@ abstract public class AbstractMap {
     //blocks
     protected ArrayList<Rectangle> blockRectangles;
 
+    //portals
+    protected Rectangle portalRectangle;
+
     //monsters
     protected ArrayList<AbstractCharacter> monsters;
 
@@ -42,6 +45,19 @@ abstract public class AbstractMap {
         }
         return false;
     }
+
+    public void setPortalRectangle(Rectangle r) {
+        portalRectangle = r;
+    }
+
+    public boolean isPortal(Rectangle r) {
+        if (portalRectangle == null) {
+            return false;
+        }
+        return portalRectangle.intersects(r);
+    }
+
+    abstract public void next();
 
     abstract public int[][] getRawMapData();
 }
