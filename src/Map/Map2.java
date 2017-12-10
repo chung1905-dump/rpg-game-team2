@@ -2,7 +2,9 @@ package Map;
 
 import Entity.AbstractCharacter;
 import Interface.BlockTile;
+import Interface.PortalTile;
 import Main.GamePanel;
+import Manager.GameStateManager;
 import Map.Tiles.*;
 
 import java.awt.*;
@@ -47,7 +49,12 @@ public class Map2 extends AbstractMap {
                     addBlock(
                             new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
                     );
+                } else if (tiles[rawMapData[y][x]] instanceof PortalTile) {
+                    setPortalRectangle(
+                            new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
+                    );
                 }
+
             }
         }
 
@@ -95,7 +102,7 @@ public class Map2 extends AbstractMap {
                 {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
                 {2, 2, 1, 0, 0, 0, 0, 0, 0, 2},
                 {2, 2, 0, 0, 1, 0, 1, 0, 0, 2},
-                {2, 2, 0, 0, 0, 0, 1, 0, 0, 2},
+                {2, 2, 0, 0, 0, 0, 1, 0, 0, 3},
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
         };
 
@@ -103,6 +110,7 @@ public class Map2 extends AbstractMap {
 
     @Override
     public AbstractMap next() {
+        GameStateManager.getInstance().setState(GameStateManager.WIN);
         return null;
     }
 

@@ -5,7 +5,6 @@ import Entity.Monster1;
 import Interface.BlockTile;
 import Interface.PortalTile;
 import Main.GamePanel;
-import Manager.GameStateManager;
 import Manager.TileMapManager;
 import Map.Tiles.*;
 
@@ -50,8 +49,7 @@ public class TestMap extends AbstractMap {
                     addBlock(
                             new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
                     );
-                }
-                if (tiles[rawMapData[y][x]] instanceof PortalTile) {
+                } else if (tiles[rawMapData[y][x]] instanceof PortalTile) {
                     setPortalRectangle(
                             new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight)
                     );

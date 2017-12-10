@@ -46,7 +46,7 @@ public class GameStateManager {
             gameStates[i] = new GameOverState(this);
             gameStates[i].init();
         }else if (i == WIN) {
-            gameStates[i] = new GameOverState(this);
+            gameStates[i] = new WinState(this);
             gameStates[i].init();
         }
     }
