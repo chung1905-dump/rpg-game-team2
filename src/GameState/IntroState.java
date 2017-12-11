@@ -24,7 +24,7 @@ public class IntroState extends AbstractGameState {
     public void init() {
         ticks = 0;
         try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/images/logo/1.jpg"));
+            logo = ImageIO.read(getClass().getResourceAsStream("/images/logo/team2.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

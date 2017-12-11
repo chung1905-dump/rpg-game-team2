@@ -24,7 +24,7 @@ public class WinState extends AbstractGameState {
     public void init() {
         ticks = 0;
         try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/images/logo/Win.png"));
+            logo = ImageIO.read(getClass().getResourceAsStream("/images/logo/Win1.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
